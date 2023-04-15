@@ -1,4 +1,4 @@
-# Kioptrix findings
+# Kioptrix
 
 ### Ports open
 
@@ -57,3 +57,41 @@ may allow a remote shell.
 139 - Potentially vulnerable to trans2open (https://www.rapid7.com/db/modules/exploit/linux/samba/trans2open/), (https://www.exploit-db.com/exploits/7), (https://www.exploit-db.com/exploits/10)
 
 22 - Potentially vulnerable to username enumeration (https://github.com/Sait-Nuri/CVE-2018-15473)
+
+The [Nessus scan](./kioptrix-nessus-scan.pdf) shows multiple critical vulnerabilities.
+
+### Exploitation
+
+**SMB - trans2open**
+
+Obtained root using the trans2open module in Metasploit to exploit a vulnerable Samba 
+version.
+
+Metasploit screenshot
+
+**80 - modssl**
+
+OpenLuck screenshot
+
+### Post Exploitation
+
+**Shadow file**
+
+### Findings
+
+**Default Webpage - Apache**
+
+Screenshot of page
+
+**Information Disclosure**
+
+Host name, screenshot
+
+**Undetected Malicious Activity**
+
+Scanning, SSH brute force attempts
+Screenshots
+
+### Remediation
+
+Update software and services to latest versions.

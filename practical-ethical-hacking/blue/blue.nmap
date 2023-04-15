@@ -1,0 +1,32 @@
+# Nmap 7.93 scan initiated Thu Apr 13 10:03:59 2023 as: nmap -p- -A -oN blue.nmap 192.168.128.131
+Nmap scan report for 192.168.128.131
+Host is up (0.000044s latency).
+Not shown: 65416 closed tcp ports (reset), 110 filtered tcp ports (no-response)
+PORT      STATE SERVICE    VERSION
+135/tcp   open  tcpwrapped
+139/tcp   open  tcpwrapped
+445/tcp   open  tcpwrapped
+49152/tcp open  tcpwrapped
+49153/tcp open  tcpwrapped
+49154/tcp open  tcpwrapped
+49155/tcp open  tcpwrapped
+49156/tcp open  tcpwrapped
+49157/tcp open  tcpwrapped
+MAC Address: 00:0C:29:AD:DA:5D (VMware)
+Device type: firewall
+Running (JUST GUESSING): Fortinet embedded (87%)
+OS CPE: cpe:/h:fortinet:fortigate_100d
+Aggressive OS guesses: Fortinet FortiGate 100D firewall (87%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 1 hop
+
+Host script results:
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.04 ms 192.168.128.131
+
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Apr 13 10:26:54 2023 -- 1 IP address (1 host up) scanned in 1375.24 seconds
