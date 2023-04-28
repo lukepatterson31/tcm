@@ -1,0 +1,11 @@
+/
+/icons/
+/icons/small/
+/dev/
+/dev/files/
+/dev/pages/
+/dev/forms/
+/dev/config/
+/dev/stamps/
+/index.php
+/dev/index.php
