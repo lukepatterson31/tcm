@@ -51,3 +51,35 @@ AD DS Data Store
 |Forests|
 |Sites|
 |Organisational units (OUs)|
+
+![AD DS Schema](./pictures/ad-ds-schema.png)
+
+![Domains](./pictures/domains.png)
+
+![Trees](./pictures/trees.png)
+
+![Forests](./pictures/forests.png)
+
+![Organizational Units](./pictures/ous.png)
+
+![Trusts](./pictures/trusts.png)
+
+![Objects](./pictures/objects.png)
+
+### Active Directory Lab Build
+
+1 x Windows Server 2022
+2 x Windows 10 Workstations
+
+Cloud based Lab in Azure https://kamran-bilgrami.medium.com/ethical-hacking-lessons-building-free-active-directory-lab-in-azure-6c67a7eddd7f
+
+### Necessary ISOs
+
+Enter dummy data when asked. Real email, phone, etc. not needed
+
+[Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter)
+
+[Windows Server 2022](https://info.microsoft.com/ww-landing-windows-server-2022.html)
+[Windows 10 Enterprise](https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise)
+
+### Setting Up the Domain Controller
