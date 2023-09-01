@@ -202,4 +202,41 @@ domain if a DA logs into the network
 
 ### IPv6 Attack Defenses
 
+**Mitigation Strategies:**
 
+IPv6 poisoning abuses the fact that Windows queries for an IPv6 address even in IPv4-only environments.
+If you do not use IPv6 internally, the safest way to prevent mitm6 is to block DHCPv6 traffic and incoming
+routeradvertisements in Windows Firewall via Group Policy. Disabling IPv6 entirely may have unwanted 
+side effects. Setting the following predefined rules to Block instead of Allow prevents the attack from 
+working:
+- (Inbound) Core Networking - Dynamic Host Configuration Protocol for IPv6 (DHCPv6-IN)
+- (Inbound) Core Networking - Router Advertisement (ICMPv6-In)
+- (Outbound) Core Networking - Dynamic Host Configuration Protocol for IPv6 (DHCPv6-Out)
+
+If WPAD is not in use internally, disable it via Group Policy and by disabling the WinHttpAutoProxySvc 
+service
+
+Relaying to LDAP and LDAPS can only be mitigated by enabling both LDAP signing and LDAP channel binding
+
+*Adding admins to Protected Users is best practice*
+
+Consider adding Administrative users to the Protected User group or marking them as "Account is sensitive
+and cannot be delegated", which will prevent any impersonation of that user via delegation
+
+### Passback Atacks
+
+Abusing accessible printer/IoT configuration panels to send credentials via LDAP or SMTP
+
+https://www.mindpointgroup.com/blog/how-to-hack-through-a-pass-back-attack/
+
+### Initial Internal Attack Strategy
+
+1. Begin day with mitm6 or Responder
+2. Run scans to generate traffic (Nessus, nmap)
+3. If scans are taking too long, look for websites in scope (http_version)
+4. Look for default credentials on web logins; Printers, Jenkins, etc
+5. Think outside the box
+
+If initial attack doesn't get credentials, ask the client for credentials to further test the network
+
+Enumerate!
