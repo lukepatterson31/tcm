@@ -86,3 +86,58 @@ etc.)
 Run lsassy to dump any secrets stored in memory (NTLM hashes of logged in users)
 
 `crackmapexec smb 10.0.0.0/24 -u administrator -H admin-hash --local-auth -M lsassy`
+
+Use the CME DB to view hosts, credentials, shares, etc. that were found while using CME
+
+### Dumping and Cracking Hashes
+
+Run secretsdump on a target you have credentials for
+
+`secretsdump.py DOMAIN.com/user:password@10.0.0.1`
+
+Grab SAM hashes for the users, DCC2 hashes, cleartext passwords, wdigest (older protocol, enabled by default 
+on older systems)
+
+Look for old systems as we may find cleartext Domain Admin passwords
+
+wdigest can be force enabled, then wait for a user to log in to grab cleartext password of the user
+
+Write a bash one-liner to dump the cmedb hosts and then use the found credentials to run secretsdump against 
+all the hosts
+
+Hashes can also be used
+
+`secretsdump.py administrator:@10.0.0.1 -hashes hash`
+
+Crack the hashes with the NT part -> LM:NT
+
+`hashcat -m 1000 hash.txt rockyou.txt`
+
+Example lateral movement with credentials:
+
+Initial compromise of hash/credentials -> crack hash/use hash to secretsdump -> spray network with password 
+-> find logins -> use secretsdump -> local admin hashes -> respray the network with local admin accounts
+
+### Pass Attack Mitigations
+
+Hard to completely prevent, but we can make it more difficult for an attacker
+
+Limit account re-use:
+
+- Avoid re-using local admin passwords
+- Disable Guest and Administrator accounts
+- Limit who is a local admin (least privilege)
+
+Utilize strong passwords:
+
+- The longer the better (>14 chars)
+- Avoid using common words
+- Long sentences can be good
+
+Privilege Access Management (PAM):
+
+- Check out/in sensitive accounts when needed
+- Automatically rotate passwords on check out and check in
+- Limits pass attacks as hash/password is strong and constantly rotated
+
+
