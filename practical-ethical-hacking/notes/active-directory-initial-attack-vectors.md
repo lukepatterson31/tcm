@@ -74,7 +74,7 @@ If a company must use or cannot disable LLMNR/NBT-NS, the best course of action 
 
 **What is SMB Relay?**
 
-Instead of crackiong hashes gathered with Responder, we can instead relay those hashes to specific machines
+Instead of cracking hashes gathered with Responder, we can instead relay those hashes to specific machines
 and potentially gain access
 
 Requirements:
