@@ -213,3 +213,64 @@ IconIndex=1
 ```
 
 ### GPP/cPassword Attacks and Mitigations
+
+Overview:
+
+- Group Policy Preferences (GPP) allowed admins to create policies using embedded credentials
+- These credentials wee encrypted and placed in a "cPassword"
+- The key was accidentally released
+- Patched in MS14-025, but it doesn't prevent previous uses
+- Still relevant on Pentests despite age (nearly 10 years old!)
+
+`gpp-decrypt` on kali
+
+Metasploit module smb_enum_gpp for enumeration, requires valid credentials
+
+Mititgation Strategies:
+
+- Patch! Fixed in KB2962486
+- Delete the old GPP xml files stored in SYSVOL
+
+### Mimikatz Overview
+
+Overview:
+
+- Tool used to view and steal credentials, generate Kerberos tickets, and leverage attacks
+- Dump credentials stored in memory
+- Just a few attacks: Credential dumping, Pass-the-Hash, Over-Pass-the-Hash, Pass-the-Ticket, Silver Ticket, 
+and Golden Ticket
+
+### Credential Dumping with mimikatz
+
+Upload mimidrv.sys, mimispool.dll, mimilib.dll, mimikatz.exe from a github.com/gentilkiwi/mimikatz release
+
+*Nuke defender first, otherwise will be picked up and quarantined*
+
+Run mimikatz as admin and execute `privilege::debug`
+
+List options by executing `command::` e.g. `privilege::`
+
+`sekurlsa::logonPasswords` will show connection passwords in plain text, e.g credentials used to mount 
+network drives
+
+### Post-Compromise Attack Strategy
+
+We have an account, now what?
+
+Search for the quick wins:
+
+- Kerberoasting
+- Secretsdump
+- Pass the hash/Pass the password
+
+No quick wins? Dig deep!
+
+- Enumerate (Bloodhound, etc.)
+- Where does your account have access?
+- Old vulnerabilities die hard
+
+Think outside the box
+
+Additional tools:
+
+- certipy for certificate attacks
