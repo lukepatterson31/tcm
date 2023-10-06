@@ -26,7 +26,9 @@ VALUES ("jessamy","kittems",31);
 
 ### SQL injection - UNION
 
-try and force SQL errors with `'` or `"`
+Try and force SQL errors with `'` or `"`
+
+Use `#` or `-- -` to comment out the remaining query
 
 Find injection with ojectively true statements `' or 1=1#`
 
