@@ -65,3 +65,7 @@ Break down the report into an Executive summary and a Technical summary
 - Addtional reports and scans (scan output in pdf/excel)
 
 ### Reviewing a Real Pentest Report
+
+[Report](./resources/TCMS-Demo-Corp-Security-Assessment-Findings-Report.pdf)
+
+**Notes:**
