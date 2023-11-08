@@ -2,7 +2,8 @@
 
 ### Overview
 
-Using HTB SecNotes  
+Using HTB SecNotes - write up here: https://github.com/lukepatterson31/htb/tree/main/machines/secnotes/secnotes.md
+
 Involves techniques from [PayloadsAllTheThings Windows Privesc](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md#eop---windows-subsystem-for-linux-wsl)
 
 ### Gaining a Foothold
