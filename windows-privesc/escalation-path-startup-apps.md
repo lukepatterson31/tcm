@@ -20,3 +20,9 @@ If the user has write permissions we can create a malicious executable and place
 causing the executable to run on startup
 
 ### Escalation via Startup Applications
+
+Generate a payload with msfvenom, upload the file to the target and save it in Startup.
+
+Start a multi/handler listener, disconnect from the RDP session and reconnect as TCM (Administrator)
+
+The malicious Startup executable will run on log in and give us a reverse shell as Administrator
