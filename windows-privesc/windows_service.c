@@ -1,3 +1,6 @@
+// For x64 compile with: x86_64-w64-mingw32-gcc windows_service.c -o service.exe
+// For x86 compile with: i686-w64-mingw32-gcc windows_service.c -o service.exe
+
 #include <windows.h>
 #include <stdio.h>
 

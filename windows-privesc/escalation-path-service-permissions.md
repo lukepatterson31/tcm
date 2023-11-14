@@ -57,3 +57,16 @@ When we start the service, the meterpreter reverse shell will execute
 ### Challenge Overview
 
 THM Steel Mountain - https://tryhackme.com/room/steelmountain
+Full write up here - https://github.com/lukepatterson31/thm/blob/main/write-ups/steel-mountain/steel-mountain.md
+
+Initial access with CVE-2014-6287
+
+Add Invoke-AllChecks at the bottom of the PowerUp.ps1 file to be able to execute it directly in case of a 
+frozen shell
+
+`powershell -ep bypass PowerUp.ps1`
+
+Alternatively, migrate to a 64bit process like explorer.exe, load the powershell module and import PowerUp.ps1
+and run Invoke-AllChecks
+
+Privilege escalation through unquoted service path
